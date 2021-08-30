@@ -5,42 +5,24 @@ int main()
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
-    map <string, set<string>> mapka; 
     int n;
+    string tmp2, tmp;
+    map <string, set<string>> M;
+    set <string> finala;
     cin >> n;
-    string tab[n];
-    vector <string> vec(n);
     for(int i = 0; i < n; i++)
     {
-        cin >> tab[i];
-        string tmp = tab[i];
+        cin >> tmp2;
+        tmp = tmp2;
         sort(tmp.begin(), tmp.end());
-        mapka[tmp].insert(tab[i]);
-        for(int j = 0; j < n; j++)
-        {
-            if(i != j)
-            {
-                string tmp2 = tab[j];
-                sort(tmp2.begin(), tmp2.end());
-                if(tmp == tmp2) mapka[tmp].insert(tab[j]);
-            }
-        }
+        M[tmp].insert(tmp2);
     }
-    for(int i = 0; i < n; i++)
+    for(auto elem : M)
     {
-        string tmp = tab[i], res = "";
-        sort(tmp.begin(), tmp.end());
-        if(!mapka[tmp].count("2137")) 
-        {
-            for (auto elem: mapka[tmp]) 
-            {
-                res += (elem + ' ');
-            }
-            if(res != "") vec.push_back(res);
-        }
-        mapka[tmp].insert("2137");
+        string tempo = "";
+        for(auto ite : elem.second) tempo += (ite + ' ');
+        finala.insert(tempo);
     }
-    sort(vec.begin(), vec.end());
-    for(auto elem : vec) if(elem != "") cout << elem << endl;
+    for(auto elem : finala) cout << elem << '\n';
     return 0;
 }
